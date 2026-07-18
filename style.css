@@ -1,18 +1,31 @@
 body {
-    /* Ton arrière-plan rose clair avec les petites étoiles */
-    background-color: #fce8f3;
-    background-image: url('https://www.transparenttextures.com/patterns/stardust.png'); /* Exemple d'effet d'étoiles */
+    background: linear-gradient(to bottom right, #ffe6f2, #ffcce6);
+    background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    cursor: crosshair;
+    overflow: hidden;
 }
 
 #catch-text {
-    font-family: 'Arial', sans-serif;
-    color: #881337; /* Rose foncé */
-    font-size: 2.5rem;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #881337;
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.5);
     text-align: center;
-    transition: all 0.5s ease;
+}
+
+.heart-trail {
+    position: absolute;
+    font-size: 1.5rem;
+    pointer-events: none;
+    animation: fadeOutUp 1s linear forwards;
+}
+
+@keyframes fadeOutUp {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -150%) scale(0.5); }
 }
