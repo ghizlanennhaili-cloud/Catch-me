@@ -13,20 +13,17 @@ body {
     font-family: 'Arial', sans-serif;
     color: #881337;
     position: absolute;
-    /* transition pour le rétrécissement fluide */
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
     cursor: pointer;
     user-select: none;
-    font-size: 3rem; 
+    z-index: 10;
 }
 
-/* Classe pour rétrécir le texte quand on s'approche */
-.text-small {
-    font-size: 0.5rem !important;
-    opacity: 0.3;
-}
+/* Classes pour la taille */
+.text-normal { font-size: 3rem; opacity: 1; }
+.text-tiny { font-size: 0.2rem; opacity: 0.1; }
 
-/* Style des emojis flottants */
+/* Emojis flottants */
 .emoji-floating {
     position: absolute;
     width: 50px;

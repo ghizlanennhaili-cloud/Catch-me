@@ -10,8 +10,9 @@ const phrases = [
 
 const textElement = document.getElementById('catch-text');
 const container = document.getElementById('animations-container');
+let isTiny = false;
 
-// 1. Création automatique des emojis flottants
+// 1. Emojis flottants
 const emojiUrls = [
     "https://images.emojiterra.com/google/noto-emoji/animated-emoji/1f496.gif",
     "https://images.emojiterra.com/google/noto-emoji/animated-emoji/2728.gif",
@@ -29,26 +30,22 @@ function createEmoji() {
 }
 setInterval(createEmoji, 2000);
 
-// 2. Comportement du texte (rétrécissement et fuite)
+// 2. Clic : Change taille et phrase
+textElement.addEventListener('click', () => {
+    isTiny = !isTiny;
+    textElement.className = isTiny ? 'text-tiny' : 'text-normal';
+    textElement.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+});
+
+// 3. Fuite à l'approche
 document.addEventListener('mousemove', (e) => {
     const rect = textElement.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     const distance = Math.sqrt(Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2));
 
-    // Rétrécit si on est à moins de 200px
-    if (distance < 200) {
-        textElement.classList.add('text-small');
-    } else {
-        textElement.classList.remove('text-small');
-    }
-
-    // S'enfuit et change de phrase si on est à moins de 50px
     if (distance < 50) {
-        const randomX = Math.random() * (window.innerWidth - 150);
-        const randomY = Math.random() * (window.innerHeight - 50);
-        textElement.style.left = randomX + 'px';
-        textElement.style.top = randomY + 'px';
-        textElement.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+        textElement.style.left = (Math.random() * (window.innerWidth - 100)) + 'px';
+        textElement.style.top = (Math.random() * (window.innerHeight - 50)) + 'px';
     }
 });
