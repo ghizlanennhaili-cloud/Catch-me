@@ -1,35 +1,44 @@
 const phrases = [
     "Can you catch me? 😜",
-    "catch me 💪",
-    "catch me 😊",
-    "catch me 😄",
-    "catch me 🤗",
-     "catch me 😊",
-    "you can't catch me 😏",
-    "too close😮",
-    "catch me 😁",
-    "catch me 😄",
-    "catch me 😆",
-    "catch me 😂",
-    "catch me🏃‍♀️",
-    "catch me 🤣"
+    "Attrape-moi ! 🏃‍♀️",
+    "Trop lent ! 😏",
+    "Essaye encore ! 😮",
+    "Mel..... lo..... 😉",
+    "Tu m'auras pas ! 😝",
+    "Rateeeer ! 😆",
+    "😂🤣"
 ];
 
 const textElement = document.getElementById('catch-text');
 
-// Changement de texte toutes les 2 secondes
-setInterval(() => {
+// --- Partie 1 : Changement de phrase automatique ---
+function changePhrase() {
     const randomIndex = Math.floor(Math.random() * phrases.length);
     textElement.innerText = phrases[randomIndex];
-}, 2000);
+}
 
-// Traînée de cœurs au mouvement de la souris
-document.addEventListener('mousemove', (event) => {
-    const heart = document.createElement('span');
-    heart.innerText = '💖';
-    heart.classList.add('heart-trail');
-    heart.style.left = event.pageX + 'px';
-    heart.style.top = event.pageY + 'px';
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 1000);
+// Change de phrase toutes les 3 secondes pour le fun
+setInterval(changePhrase, 3000);
+
+
+// --- Partie 2 : Le jeu de "l'évitement" ---
+textElement.addEventListener('mouseover', () => {
+    // 1. Grossit le texte
+    textElement.classList.add('big');
+
+    // 2. Calcule des positions aléatoires sur l'écran
+    const maxX = window.innerWidth - textElement.offsetWidth - 50;
+    const maxY = window.innerHeight - textElement.offsetHeight - 50;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    // 3. Applique les nouvelles positions
+    textElement.style.left = `${randomX}px`;
+    textElement.style.top = `${randomY}px`;
+});
+
+// Quand la souris quitte le texte, il redevient normal
+textElement.addEventListener('mouseout', () => {
+    textElement.classList.remove('big');
 });
