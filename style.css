@@ -1,40 +1,16 @@
-body {
-    /* Ton dégradé rose */
-    background: linear-gradient(180deg, #ffcce6, #fce8f3);
-    height: 100vh;
-    margin: 0;
-    overflow: hidden;
-    cursor: crosshair;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 #catch-text {
     font-family: 'Arial', sans-serif;
     color: #881337;
     position: absolute;
-    transition: all 0.5s ease;
+    /* transition permet de rendre le changement de taille fluide */
+    transition: all 0.3s ease; 
     cursor: pointer;
     user-select: none;
-    /* Effet respirant (petit vers grand) */
-    animation: breathe 3s infinite ease-in-out;
+    font-size: 3rem; /* Taille par défaut */
 }
 
-@keyframes breathe {
-    0%, 100% { font-size: 0.5rem; opacity: 0.5; }
-    50% { font-size: 4rem; opacity: 1; }
-}
-
-.emoji-floating {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    pointer-events: none;
-    animation: float 10s linear infinite;
-}
-
-@keyframes float {
-    from { transform: translateY(100vh); }
-    to { transform: translateY(-100px); }
+/* Classe ajoutée par JS quand on s'approche */
+.text-small {
+    font-size: 0.5rem; /* Devient à peine visible */
+    opacity: 0.3;
 }
