@@ -11,10 +11,10 @@ const phrases = [
 const textElement = document.getElementById('catch-text');
 const container = document.getElementById('animations-container');
 
-let currentSize = 24; // Taille de départ
-let shrinking = true;  // Sens du changement (diminue ou augmente)
+let currentSize = 24; 
+let shrinking = true;
 
-// 1. Emojis flottants
+// Emojis flottants
 const emojiUrls = ["https://images.emojiterra.com/google/noto-emoji/animated-emoji/1f496.gif", "https://images.emojiterra.com/google/noto-emoji/animated-emoji/2728.gif", "https://images.emojiterra.com/google/noto-emoji/animated-emoji/1f98b.gif"];
 
 function createEmoji() {
@@ -28,9 +28,8 @@ function createEmoji() {
 }
 setInterval(createEmoji, 2000);
 
-// 2. Clic : Changement de taille progressif
+// Clic : Changement de taille progressif
 textElement.addEventListener('click', () => {
-    // Logique de taille : 24, 22, 20... jusqu'à 6, puis remonte
     if (shrinking) {
         currentSize -= 2;
         if (currentSize <= 6) shrinking = false;
@@ -38,20 +37,28 @@ textElement.addEventListener('click', () => {
         currentSize += 2;
         if (currentSize >= 24) shrinking = true;
     }
-    
     textElement.style.fontSize = currentSize + 'px';
 });
 
-// 3. Fuite quand curseur proche
+// FUITE : Mouvement quand le curseur approche
 document.addEventListener('mousemove', (e) => {
     const rect = textElement.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
+    
+    // Calcul de la distance
     const distance = Math.sqrt(Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2));
 
-    if (distance < 50) {
-        textElement.style.left = (Math.random() * (window.innerWidth - 100)) + 'px';
-        textElement.style.top = (Math.random() * (window.innerHeight - 50)) + 'px';
+    // J'ai augmenté la distance de détection à 100px (au lieu de 50px) 
+    // pour qu'il soit plus facile de "l'attraper" même quand il est minuscule.
+    if (distance < 100) { 
+        const randomX = Math.random() * (window.innerWidth - 150);
+        const randomY = Math.random() * (window.innerHeight - 50);
+        
+        textElement.style.left = randomX + 'px';
+        textElement.style.top = randomY + 'px';
+        
+        // Change le texte à chaque fuite
         textElement.innerText = phrases[Math.floor(Math.random() * phrases.length)];
     }
 });
