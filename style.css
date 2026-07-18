@@ -1,16 +1,41 @@
+body {
+    background: linear-gradient(180deg, #ffcce6, #fce8f3);
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    cursor: crosshair;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #catch-text {
     font-family: 'Arial', sans-serif;
     color: #881337;
     position: absolute;
-    /* transition permet de rendre le changement de taille fluide */
-    transition: all 0.3s ease; 
+    /* transition pour le rétrécissement fluide */
+    transition: all 0.3s ease;
     cursor: pointer;
     user-select: none;
-    font-size: 3rem; /* Taille par défaut */
+    font-size: 3rem; 
 }
 
-/* Classe ajoutée par JS quand on s'approche */
+/* Classe pour rétrécir le texte quand on s'approche */
 .text-small {
-    font-size: 0.5rem; /* Devient à peine visible */
+    font-size: 0.5rem !important;
     opacity: 0.3;
+}
+
+/* Style des emojis flottants */
+.emoji-floating {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    pointer-events: none;
+    animation: float 10s linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-100px); }
 }

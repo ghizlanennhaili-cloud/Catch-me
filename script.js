@@ -11,14 +11,13 @@ const phrases = [
 const textElement = document.getElementById('catch-text');
 const container = document.getElementById('animations-container');
 
-// Liste des emojis animés
+// 1. Création automatique des emojis flottants
 const emojiUrls = [
     "https://images.emojiterra.com/google/noto-emoji/animated-emoji/1f496.gif",
     "https://images.emojiterra.com/google/noto-emoji/animated-emoji/2728.gif",
     "https://images.emojiterra.com/google/noto-emoji/animated-emoji/1f98b.gif"
 ];
 
-// Créer des emojis flottants
 function createEmoji() {
     const img = document.createElement('img');
     img.src = emojiUrls[Math.floor(Math.random() * emojiUrls.length)];
@@ -30,21 +29,21 @@ function createEmoji() {
 }
 setInterval(createEmoji, 2000);
 
-// Interaction : Rétrécissement à l'approche et fuite au contact
+// 2. Comportement du texte (rétrécissement et fuite)
 document.addEventListener('mousemove', (e) => {
     const rect = textElement.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     const distance = Math.sqrt(Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2));
 
-    // Si la souris est proche (moins de 200px), on réduit la taille
+    // Rétrécit si on est à moins de 200px
     if (distance < 200) {
         textElement.classList.add('text-small');
     } else {
         textElement.classList.remove('text-small');
     }
 
-    // Si on est vraiment très près (moins de 50px), le texte "s'enfuit"
+    // S'enfuit et change de phrase si on est à moins de 50px
     if (distance < 50) {
         const randomX = Math.random() * (window.innerWidth - 150);
         const randomY = Math.random() * (window.innerHeight - 50);
