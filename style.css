@@ -1,39 +1,18 @@
-/* On s'assure que le jeu occupe tout l'écran */
 body {
-    margin: 0;
-    padding: 0;
+    /* Ton arrière-plan rose clair avec les petites étoiles */
+    background-color: #fce8f3;
+    background-image: url('https://www.transparenttextures.com/patterns/stardust.png'); /* Exemple d'effet d'étoiles */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
-    width: 100vw;
-    overflow: hidden; /* Empêche les barres de défilement d'apparaître */
-    background-color: #f4f7f6;
-    font-family: 'Arial', sans-serif;
+    margin: 0;
 }
 
-#target {
-    /* La position absolute est indispensable pour pouvoir le déplacer partout */
-    position: absolute;
-    
-    /* Centrage initial optionnel (avant le premier survol) */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    /* Apparence du texte */
-    font-weight: bold;
-    color: #2c3e50;
-    
-    /* Animation fluide quand la taille change */
-    transition: all 0.15s ease-out;
-    
-    /* Le curseur change pour indiquer qu'on peut essayer de cliquer/survoler */
-    cursor: pointer;
-    
-    /* Empêche de sélectionner le texte par erreur */
-    user-select: none;
-    
-    /* Taille initiale pour correspondre au script JS */
-    font-size: 50px;
-    
-    /* Un peu d'ombre pour un effet sympa */
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+#catch-text {
+    font-family: 'Arial', sans-serif;
+    color: #881337; /* Rose foncé */
+    font-size: 2.5rem;
+    text-align: center;
+    transition: all 0.5s ease;
 }
