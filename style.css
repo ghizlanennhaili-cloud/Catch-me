@@ -13,17 +13,12 @@ body {
     font-family: 'Arial', sans-serif;
     color: #881337;
     position: absolute;
-    transition: all 0.5s ease;
+    transition: font-size 0.2s ease; /* Transition douce pour la taille */
     cursor: pointer;
     user-select: none;
     z-index: 10;
 }
 
-/* Classes pour la taille */
-.text-normal { font-size: 3rem; opacity: 1; }
-.text-tiny { font-size: 0.2rem; opacity: 0.1; }
-
-/* Emojis flottants */
 .emoji-floating {
     position: absolute;
     width: 50px;

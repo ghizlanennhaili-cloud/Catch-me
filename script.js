@@ -10,14 +10,12 @@ const phrases = [
 
 const textElement = document.getElementById('catch-text');
 const container = document.getElementById('animations-container');
-let isTiny = false;
+
+let currentSize = 24; // Taille de départ
+let shrinking = true;  // Sens du changement (diminue ou augmente)
 
 // 1. Emojis flottants
-const emojiUrls = [
-    "https://images.emojiterra.com/google/noto-emoji/animated-emoji/1f496.gif",
-    "https://images.emojiterra.com/google/noto-emoji/animated-emoji/2728.gif",
-    "https://images.emojiterra.com/google/noto-emoji/animated-emoji/1f98b.gif"
-];
+const emojiUrls = ["https://images.emojiterra.com/google/noto-emoji/animated-emoji/1f496.gif", "https://images.emojiterra.com/google/noto-emoji/animated-emoji/2728.gif", "https://images.emojiterra.com/google/noto-emoji/animated-emoji/1f98b.gif"];
 
 function createEmoji() {
     const img = document.createElement('img');
@@ -30,14 +28,21 @@ function createEmoji() {
 }
 setInterval(createEmoji, 2000);
 
-// 2. Clic : Change taille et phrase
+// 2. Clic : Changement de taille progressif
 textElement.addEventListener('click', () => {
-    isTiny = !isTiny;
-    textElement.className = isTiny ? 'text-tiny' : 'text-normal';
-    textElement.innerText = phrases[Math.floor(Math.random() * phrases.length)];
+    // Logique de taille : 24, 22, 20... jusqu'à 6, puis remonte
+    if (shrinking) {
+        currentSize -= 2;
+        if (currentSize <= 6) shrinking = false;
+    } else {
+        currentSize += 2;
+        if (currentSize >= 24) shrinking = true;
+    }
+    
+    textElement.style.fontSize = currentSize + 'px';
 });
 
-// 3. Fuite à l'approche
+// 3. Fuite quand curseur proche
 document.addEventListener('mousemove', (e) => {
     const rect = textElement.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -47,5 +52,6 @@ document.addEventListener('mousemove', (e) => {
     if (distance < 50) {
         textElement.style.left = (Math.random() * (window.innerWidth - 100)) + 'px';
         textElement.style.top = (Math.random() * (window.innerHeight - 50)) + 'px';
+        textElement.innerText = phrases[Math.floor(Math.random() * phrases.length)];
     }
 });
